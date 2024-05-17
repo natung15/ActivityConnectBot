@@ -48,11 +48,14 @@ async def on_message(message:Message) -> None:
     channel: str = str(message.channel)
     print(f'[{channel}] {username}: "{user_message}"')
     if user_message == 'hi':
-        await asyncio.sleep(1)
+        
         for member in message.guild.members:
             await message.channel.send(f'{member}')
+            await asyncio.sleep(1)
             if member.activity:
                 await message.channel.send(f'{member.name} is playing {member.activity.name}')
+            else:
+                await message.channel.send(f'{member.name} is not playing anything')
     else:
         await send_message(message, user_message)
 
